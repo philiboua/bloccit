@@ -1,2 +1,11 @@
-@import "bootstrap";
 @import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+.btn-primary{
+    position:relative;
+    left:400px;
+    background: #FFF;  
+    
+}
