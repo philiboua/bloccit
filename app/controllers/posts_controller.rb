@@ -1,22 +1,25 @@
 class PostsController < ApplicationController
-  def index
+  #def index
     #@posts = Post.all
      # authorize @posts
      # @posts = current_user && current_user.admin? ? Post.all : Post.where(user_id: current_user.id)
      # Post.visible_to(current_user)
-     @posts = policy_scope(Post)
-  end
+     #@posts = policy_scope(Post)
+  #end
 
   def show
     @post = Post.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
   end
 
   def new
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new
       authorize @post 
   end
 
   def create
+    @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(params.require(:post).permit(:title, :body))
       authorize @post
     if @post.save
@@ -29,11 +32,13 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
       authorize @post
   end
 
   def update
+    @topic = Topic.find(params[:topic_id])
      @post = Post.find(params[:id])
         authorize @post
      if @post.update_attributes(params.require(:post).permit(:title, :body)) # {post: {title: "my_title", body: "my_body"} }
