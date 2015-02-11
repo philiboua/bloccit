@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
-      authorize @posts
+    #@posts = Post.all
+     # authorize @posts
+     # @posts = current_user && current_user.admin? ? Post.all : Post.where(user_id: current_user.id)
+     # Post.visible_to(current_user)
+     @posts = policy_scope(Post)
   end
 
   def show
