@@ -1,0 +1,20 @@
+<h1>Summary</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <% @summary.each do |summaries| %>
+      <div class="media">
+        <div class="media-body">
+          <small>
+            <%= link_to summary.body, topic %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <% if policy(Summray.new).create? %>
+      <%= link_to "New Summary", new_post_summary_path, class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

@@ -8,8 +8,8 @@ class PostsController < ApplicationController
   #end
 
   def show
-    @post = Post.find(params[:id])
     @topic = Topic.find(params[:topic_id])
+     @post = Post.find(params[:id])
   end
 
   def new
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:topic_id])
-     @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
         authorize @post
      if @post.update_attributes(params.require(:post).permit(:title, :body)) # {post: {title: "my_title", body: "my_body"} }
        flash[:notice] = "Post was updated."
