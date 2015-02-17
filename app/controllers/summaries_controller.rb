@@ -1,37 +1,34 @@
 class SummariesController < ApplicationController
+  before_action :find_post_and_topic
   
   def index
-    @post = Post.find(params[:id])
     @summaries = Summary.all
     authorize @summaries
    end
 
   def new
-    @post = Post.find(params[:id])
     @summary = Summary.new
     authorize @summary
   end
 
   def show
-    @post = Post.find(params[:id])
-    @summary = Summary.find(params[:id])
+    @summary = @post.summary
     authorize @summary
   end
 
   def edit
-    @post = Post.find(params[:id])
     @summary = Summary.find(params[:id])
     authorize @summary
   end
 
   
   def create
-     @summary = Summary.new(params.require(:summary).permit(:body))
+     @summary = @post.build_summary(params.require(:summary).permit(:body))
      authorize @summary
      if @summary.save
-       redirect_to @summary, notice: "Topic was saved successfully."
+       redirect_to [@topic, @post, @summary], notice: "Summary was saved successfully."
      else
-       flash[:error] = "Error creating topic. Please try again."
+       flash[:error] = "Error creating summary. Please try again."
        render :new
      end
    end
@@ -45,6 +42,13 @@ class SummariesController < ApplicationController
        flash[:error] = "Error saving topic. Please try again."
        render :edit
      end
+   end
+
+   private
+
+   def find_post_and_topic
+    @post = Post.find(params[:post_id])
+    @topic = Topic.find(params[:topic_id])
    end
 
 end

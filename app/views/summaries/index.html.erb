@@ -14,7 +14,7 @@
   </div>
   <div class="col-md-4">
     <% if policy(Summray.new).create? %>
-      <%= link_to "New Summary", new_post_summary_path, class: 'btn btn-success' %>
+      <%= link_to "New Summary", new_topic_post_summary_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>
