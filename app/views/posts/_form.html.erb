@@ -1,25 +1,8 @@
 <%= simple_form_for [topic, post] do |f| %>
-  <% if post.errors.any? %>
-    <div class="alert alert-danger">
-      <h4>There are <%= pluralize(post.errors.count, "error") %>.</h4>
-      <ul>
-        <% post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <%= simple_form_for @posts  do |f| %>
-    <%= f.error_messages %>
-    <%= f.input :title, placeholder: "Enter post title"  %>
-  <% end %>
-
-  <%= simple_form_form_for @posts do %>
-    <%= f.input :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
-  <% end %>
-
-  <div class="form-group">
+<%#= simple_form_for @posts  do |f| %>
+    <%#= f.error_messages %>
+    <%= f.input :title, placeholder: "Enter post title", input_html: {class: "my_class"}  %>
+    <%= f.input :body, rows: 8, placeholder: "Enter post body" %>
     <%= f.button :submit %>
-  </div>
-<% end %>
+  <% end %>
