@@ -4,5 +4,6 @@
     <%#= f.error_messages %>
     <%= f.input :title, placeholder: "Enter post title", input_html: {class: "my_class"}  %>
     <%= f.input :body, rows: 8, placeholder: "Enter post body" %>
+    <%= f.file_field :image %>
     <%= f.button :submit %>
   <% end %>
