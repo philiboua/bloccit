@@ -20,6 +20,7 @@
              <%= post.user.name %><br/>
              <%= post.comments.count %> Comments
            </small>
+
          </div>
        </div>
      <% end %>
@@ -28,5 +29,9 @@
    <% if policy(Post.new).create? %>
      <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
    <% end %>
+   <%= will_paginate @posts %>
  </div>
  </div>
+
+
+
