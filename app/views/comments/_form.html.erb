@@ -1,0 +1,11 @@
+<% if current_user %>
+  <h4> Add a comment: </h4>
+  <%= simple_form_for [@topic, @post, @post.comments.build] do |f| %>
+  <div class="form-group">
+      <%= f.input :body, placeholder: 'Enter your comment here' %>
+      <%= f.button :submit  %>
+  </div>
+<% end %>
+<% end %>
+
+  
