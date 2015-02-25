@@ -1,26 +1,38 @@
-class CommentsController < ActionController::Base
+class CommentsController < ApplicationController
 
   def create
-   @post = Post.find(params[:post_id])
-   @comment = @post.comments.new(comment_params)
-   @comment.user_id = current_user.id
+   #@post = Post.find(params[:post_id])
+   #@comment = @post.comments.build(comment_params)
+   #@comment.user_id = current_user.id
 
-    #@topic = Topic.find(params[:topic_id])
-    #@post = @topic.posts.find(params[:post_id])
-    #comment = current_user.comments.new(comment_params)
-    #@comments = @post.comments
-
-  
-    
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+    @comment = @post.comments.new(comment_params)
+    @comment.user = current_user
+    @comments = @post.comments
    if @comment.save
       flash[:notice] = "Your comment was saved"
-      redirect_to [@post.topic, @post]
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving your comment. Please try again."
-      render :new
+      redirect_to [@topic, @post]
     end
   end
 
+  def destroy
+     @topic = Topic.find(params[:topic_id])
+     @post = @topic.posts.find(params[:post_id])
+     @comment = @post.comments.find(params[:id])
+     authorize @comment
+
+     if @comment.destroy
+       flash[:notice] = "Comment was removed."
+       redirect_to [@topic, @post]
+     else
+       flash[:error] = "Comment couldn't be deleted. Try again."
+       redirect_to [@topic, @post]
+     end
+   end
 
   private
 
