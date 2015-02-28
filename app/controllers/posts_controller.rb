@@ -26,8 +26,7 @@ class PostsController < ApplicationController
     @post.topic = @topic
     # Rails.logger.info ">>>>>>> #{current_user.inspect}"
     #authorize @post
-    if @post.save
-      @post.create_vote
+    if @post.save_with_initial_vote
       flash[:notice] = "Post was saved"
       redirect_to [@topic, @post]
     else
