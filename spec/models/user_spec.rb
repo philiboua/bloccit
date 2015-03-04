@@ -1,14 +1,24 @@
   require 'rails_helper'
 
-  describe User do 
+describe User do 
 
-    include TestFactories
+  # include TestFactories
 
-    describe "#favorited(post)" do
-      xit "returns 'nil' if the user has not favorited the post" do 
-      end
+  describe "#favorited(post)" do
 
-      xit "returns the appropriate favorite if it exists" do
-      end
+    before do 
+      @user = create(:user)  
+      @post = create(:post, user: @user)   
     end
+
+    it "returns `nil` if the user has not favorited the post" do 
+      expect( @user.favorited(@post) ).to eq(nil)
+    end
+
+    it "returns the appropriate favorite if it exists" do
+      f = @user.favorites.where(post: @post).create
+      expect( @user.favorited(@post) ).to eq(f)
+    end
+  
   end
+end

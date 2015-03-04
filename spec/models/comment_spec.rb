@@ -2,8 +2,6 @@
 
   describe Comment do 
 
-    include Testfactories
-
     describe "after_create" do 
 
       before do 
