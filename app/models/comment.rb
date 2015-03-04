@@ -15,3 +15,5 @@ class Comment < ActiveRecord::Base
       FavoriteMailer.new_comment(favorite.user, post, self).deliver
   end
 end
+end
+
