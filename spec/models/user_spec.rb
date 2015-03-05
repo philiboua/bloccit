@@ -16,7 +16,9 @@ describe User do
     end
 
     it "returns the appropriate favorite if it exists" do
-      f = @user.favorites.where(post: @post).create
+      @favorite = Favorite.new(user_id: @user.id, post_id: @post.id)
+      @favorite.save
+      #f = @user.favorites.where(post: @post).create
       expect( @user.favorited(@post) ).to eq(f)
     end
   
