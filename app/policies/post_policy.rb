@@ -14,6 +14,6 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && can_moderate?
+    user.present? && (record.user == user || user.admin? || user.moderator?)
   end
 end
