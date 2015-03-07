@@ -38,8 +38,12 @@
   <hr/>
   <div class="row">
     <h3>Comments</h3>
+     <div class='js-comments'>
     <%= render partial: 'comments/comment', collection: @comments %>
+     </div>
+      <div class='new-comment'>
     <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+    </div>
   </div>
   
 
