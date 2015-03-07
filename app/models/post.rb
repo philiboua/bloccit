@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
 
   default_scope { order('rank DESC') }
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
 
   validates :title, length: { minimum:5 }, presence: true
   validates :body, length: {minimum: 20}, presence: true
@@ -14,15 +15,15 @@ class Post < ActiveRecord::Base
 
 
   def up_votes
-     self.votes.where(value: 1).count
+     votes.where(value: 1).count
   end
 
   def down_votes
-     self.votes.where(value: -1).count
+     votes.where(value: -1).count
   end
 
   def points
-    self.votes.sum(:value)
+    votes.sum(:value)
   end
 
   def update_rank
