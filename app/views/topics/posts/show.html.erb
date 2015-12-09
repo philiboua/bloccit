@@ -1,17 +1,26 @@
 
 
 <div class="row">
+
   <div class="col-md-8">
+
     <%= render partial: 'votes/voter', locals: { post: @post } %>
-    <h1><%= markdown_to_html @post.title %></h1>
+
+    <h1>
+      <%= markdown_to_html @post.title %>
+    </h1>
+
     <small>
-       <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
-       submitted <%= time_ago_in_words(@post.created_at) %> ago by
-       <%= @post.user.name %>
-     </small>
-    <p><%= markdown_to_html @post.body %></p>
-    <%#= image_tag @post.image_url if @post.image? %>
-  </div>
+      <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+      submitted <%= time_ago_in_words(@post.created_at) %> ago by
+      <%= @post.user.name %>
+    </small>
+
+    <p>
+      <%= markdown_to_html @post.body %>
+    </p>
+    
+  </div> <!-- end col-md-8 -->
 
   <div class="col-md-4">
     <% if policy(@post).edit? %>
@@ -19,32 +28,37 @@
     <% end %>
 
     <% if policy(@post).destroy? %>
-       <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
-     <% end %>
+      <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
+    <% end %>
      
-     <div>
-     <h3><%= pluralize(@post.points, 'point') %></h3>
-     <small>
-       <%= pluralize(@post.up_votes, 'up vote') %>,
-       <%= pluralize(@post.down_votes, 'down vote') %>
-     </small>
-   </div>
-
-      <%= render partial: 'favorites/favorite', locals: { post: @post} %>
-     
-  </div>
-</div>
-
-  <hr/>
-  <div class="row">
-    <h3>Comments</h3>
-     <div class='js-comments'>
-    <%= render partial: 'comments/comment', collection: @comments %>
-     </div>
-      <div class='new-comment'>
-    <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+    <div>
+      <h3><%= pluralize(@post.points, 'point') %></h3>
+      <small>
+        <%= pluralize(@post.up_votes, 'up vote') %>,
+        <%= pluralize(@post.down_votes, 'down vote') %>
+      </small>
     </div>
-  </div>
+
+    <%= render partial: 'favorites/favorite', locals: { post: @post} %>
+     
+  </div> <!-- end col-md-4 -->
+
+</div> <!-- row -->
+
+<hr/>
+
+<div class="row">
+
+  <h3>Comments</h3>
+  <div class='js-comments'>
+    <%= render partial: 'comments/comment', collection: @comments %>
+  </div> <!-- js comment -->
+
+  <div class='new-comment'>
+    <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+  </div> <!-- new-comment -->
+
+</div> <!-- row -->
   
 
 

@@ -4,6 +4,7 @@ describe User do
 
   # include TestFactories
 
+
   describe "#favorited(post)" do
 
 

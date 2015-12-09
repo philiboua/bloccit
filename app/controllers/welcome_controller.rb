@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+
   def index
   end
 
@@ -7,4 +8,5 @@ class WelcomeController < ApplicationController
 
   def contact
   end
+  
 end
